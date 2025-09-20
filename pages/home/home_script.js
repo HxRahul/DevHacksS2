@@ -7,6 +7,7 @@ const signInForm = document.getElementById('signInForm');
 const registerForm = document.getElementById('registerForm');
 const authMessage = document.getElementById('authMessage');
 const googleSignInBtn = document.getElementById('googleSignInBtn');
+const googleSignUpBtn = document.getElementById('googleSignUpBtn');
 
 
 if (signInForm) {
@@ -48,6 +49,20 @@ if (googleSignInBtn) {
   googleSignInBtn.addEventListener('click', async () => {
     try {
       await signInWithPopup(auth, provider);
+      window.location.href = 'pages/search/search.html';
+    } catch (error) {
+      authMessage.textContent = error.message;
+      authMessage.style.color = 'red';
+    }
+  });
+}
+
+if (googleSignUpBtn) {
+  const provider = new GoogleAuthProvider();
+  googleSignUpBtn.addEventListener('click', async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      // Optionally, you can check if the user is new and show a message
       window.location.href = 'pages/search/search.html';
     } catch (error) {
       authMessage.textContent = error.message;
