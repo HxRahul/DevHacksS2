@@ -1,4 +1,4 @@
-import { auth } from "../../../assets/js/firebase_config.js";
+import { auth, db } from "../../assets/js/firebase_config.js";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 
