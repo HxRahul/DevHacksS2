@@ -48,7 +48,39 @@ const pileRoot = document.getElementById('outfit-pile-root');
 function renderPile() {
   if (!pileRoot) return;
   pileRoot.innerHTML = `
-    <div id="outfit-pile" style="position:relative;width:420px;height:560px;margin:40px auto;">
+    <div id="outfit-pile" style="position:relative;width:800px;height:600px;margin:40px auto;">
+      <button class="dislike-btn" style="
+        position: absolute;
+        left: -120px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size:2.2rem;
+        background:#fff;
+        border-radius:50%;
+        border:none;
+        width:56px;
+        height:56px;
+        box-shadow:0 2px 8px #0002;
+        cursor:pointer;
+        z-index:10;
+        display: block;
+      ">✖</button>
+      <button class="like-btn" style="
+        position: absolute;
+        right: -120px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size:2.2rem;
+        background:#fff;
+        border-radius:50%;
+        border:none;
+        width:56px;
+        height:56px;
+        box-shadow:0 2px 8px #0002;
+        cursor:pointer;
+        z-index:10;
+        display: block;
+      ">❤</button>
       ${pile.map((outfit, i) => `
         <div class="outfit-card" data-src="${outfit.src}" style="
           position:absolute;
@@ -56,12 +88,21 @@ function renderPile() {
           transform: translate(-50%, -50%) translate(${outfit.x || 0}px, ${outfit.y || 0}px) rotate(${outfit.rotate || 0}deg);
           z-index:${pile.length - i};
           transition: transform 0.5s, opacity 0.5s;
+          width:440px;
+          height:600px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         ">
-          <img src="${outfit.src}" style="width:420px;height:540px;border-radius:24px;box-shadow:0 4px 24px rgba(0,0,0,0.15);object-fit:cover;">
-          <div style="position:absolute;bottom:24px;left:0;width:100%;display:flex;justify-content:space-between;padding:0 32px;">
-            <button class="dislike-btn" style="font-size:2.2rem;background:#fff;border-radius:50%;border:none;width:56px;height:56px;box-shadow:0 2px 8px #0002;cursor:pointer;">✖</button>
-            <button class="like-btn" style="font-size:2.2rem;background:#fff;border-radius:50%;border:none;width:56px;height:56px;box-shadow:0 2px 8px #0002;cursor:pointer;">❤</button>
-          </div>
+          <img src="${outfit.src}" style="
+            width:440px;
+            height:600px;
+            border-radius:32px;
+            box-shadow:0 4px 24px rgba(0,0,0,0.15);
+            object-fit:contain;
+            background:#fff;
+            display:block;
+          ">
         </div>
       `).reverse().join('')}
     </div>
@@ -83,9 +124,9 @@ async function handleSwipe(direction, card) {
     if (pileIndex < outfits.length) {
       pile.push({
         ...outfits[pileIndex],
-        rotate: Math.random() * 40 - 20,
-        x: Math.random() * 60 - 30,
-        y: Math.random() * 40 - 20
+        rotate: Math.random() * 30 - 20,
+        x: Math.random() * 40 - 30,
+        y: Math.random() * 30 - 20
       });
       pileIndex++;
     }
@@ -103,15 +144,15 @@ async function handleSwipe(direction, card) {
 
 if (pileRoot) {
   renderPile();
+  // Only one set of buttons, so handle clicks at the pile level
   pileRoot.addEventListener('click', function(e) {
-    if (e.target.classList.contains('like-btn') || e.target.classList.contains('dislike-btn')) {
-      const card = e.target.closest('.outfit-card');
-      if (!card) return;
-      if (e.target.classList.contains('like-btn')) {
-        handleSwipe('right', card);
-      } else {
-        handleSwipe('left', card);
-      }
+    const pileDiv = document.getElementById('outfit-pile');
+    const topCard = pileDiv && pileDiv.querySelector('.outfit-card:last-child');
+    if (!topCard) return;
+    if (e.target.classList.contains('like-btn')) {
+      handleSwipe('right', topCard);
+    } else if (e.target.classList.contains('dislike-btn')) {
+      handleSwipe('left', topCard);
     }
   });
 }
