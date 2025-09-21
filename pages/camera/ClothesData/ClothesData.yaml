@@ -1,0 +1,9 @@
+train: images/train
+val: images/train
+names:
+  0: longSleeve
+  1: pants
+  2: shorts
+  3: tshirt
+
+path: ''

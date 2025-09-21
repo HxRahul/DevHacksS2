@@ -1,0 +1,25 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "longSleeve"
+    },
+    {
+      "id": 1,
+      "name": "pants"
+    },
+    {
+      "id": 2,
+      "name": "shorts"
+    },
+    {
+      "id": 3,
+      "name": "tshirt"
+    }
+  ],
+  "info": {
+    "year": 2025,
+    "version": "1.0",
+    "contributor": "Label Studio"
+  }
+}

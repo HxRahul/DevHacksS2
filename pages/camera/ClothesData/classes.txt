@@ -1,0 +1,4 @@
+longSleeve
+pants
+shorts
+tshirt

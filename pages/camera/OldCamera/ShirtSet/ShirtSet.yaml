@@ -1,0 +1,9 @@
+path: ''
+train: images/train
+val: null
+test: null
+names:
+  0: tshirt
+  1: shorts
+  2: slipper
+download: null
