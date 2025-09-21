@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Colophon+Cd:wght@400;700&display=swap');
 
 body, html {
-  background: #8acdea !important;
+  background: #fffef5 !important;
   font-family: 'Krub', 'Colophon Cd', 'Colophon Cadson Demak', Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -15,41 +15,46 @@ body, html {
 }
 
 .header-bar {
-  background: #264653;
+  background: #544f4d; /* uniform semi-transparent dark gray */
   color: #fff;
-  padding: 0;
-  margin: 0;
-  width: 100vw;
-  min-width: 100vw;
-  position: relative;
-  left: 0;
+  position: absolute;
   top: 0;
-  box-sizing: border-box;
+  right: -30px;
+  left: auto;
+  transform: none;
+  width: 700px;
+  min-width: 400px;
+  max-width: 900px;
+  border-radius: 40px;
+  box-shadow: 0 4px 24px #544f4d;
+  z-index: 100;
+  padding: 0 24px;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  overflow: visible;
 }
 
 .header-bar-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0 32px;
-  height: 60px;
-  margin: 0 auto;
+  height: 64px;
+  margin: 0;
   max-width: 100vw;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .header-title {
-  font-size: 2rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: #fff;
-  font-family: inherit;
+  display: none;
 }
 
 nav.universal-nav {
-  background: #264653;
+  background: transparent;
   margin: 0;
-  padding: 0 32px;
+  padding: 0;
 }
 
 nav.universal-nav ul {
@@ -72,13 +77,13 @@ nav.universal-nav a, nav.universal-nav button {
   border: none;
   font: inherit;
   cursor: pointer;
-  padding: 16px 8px;
+  padding: 12px 16px;
   transition: background 0.2s;
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 nav.universal-nav a.active, nav.universal-nav a:hover, nav.universal-nav button:hover {
-  background: #2a6a7b;
+  background: #31343b;
 }
 
 .dropdown {
@@ -89,12 +94,13 @@ nav.universal-nav a.active, nav.universal-nav a:hover, nav.universal-nav button:
 .dropdown-content {
   display: none;
   position: absolute;
-  background: #264653;
+  background: #23272f;
   min-width: 140px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   z-index: 1;
   right: 0;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
 }
 
 .dropdown-content a {
@@ -102,14 +108,21 @@ nav.universal-nav a.active, nav.universal-nav a:hover, nav.universal-nav button:
   color: #fff;
   padding: 12px 16px;
   text-decoration: none;
-  background: #264653;
+  background: #23272f;
   border-radius: 0;
 }
 
 .dropdown-content a:hover {
-  background: #2a6a7b;
+  background: #31343b;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.outfit-card {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  border-radius: 24px;
+  background: #fff;
+  overflow: hidden;
 }
