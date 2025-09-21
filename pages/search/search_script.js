@@ -16,15 +16,6 @@ outfits = outfits.sort(() => Math.random() - 0.5);
 
 let currentIndex = 0;
 
-// Show outfit (for single image view, not pile)
-function showOutfit() {
-  if (currentIndex < outfits.length) {
-    document.getElementById("outfit-img").src = outfits[currentIndex].src;
-  } else {
-    document.getElementById("outfit-container").innerHTML = "<p>No more outfits!</p>";
-  }
-}
-
 // Save liked outfit to Firestore
 async function likeImage(imageSrc) {
   const user = auth.currentUser;
