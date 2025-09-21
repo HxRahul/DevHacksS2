@@ -88,7 +88,7 @@ function renderPile() {
           transform: translate(-50%, -50%) translate(${outfit.x || 0}px, ${outfit.y || 0}px) rotate(${outfit.rotate || 0}deg);
           z-index:${pile.length - i};
           transition: transform 0.5s, opacity 0.5s;
-          width:440px;
+          width:400px;
           height:600px;
           display: flex;
           align-items: center;
