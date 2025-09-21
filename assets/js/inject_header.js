@@ -2,7 +2,7 @@ export async function injectHeader() {
   const headerContainer = document.createElement('div');
   headerContainer.id = 'universal-header';
   document.body.insertBefore(headerContainer, document.body.firstChild);
-  const resp = await fetch('/assets/js/header.html');
+  const resp = await fetch(new URL('header.html', import.meta.url));
   headerContainer.innerHTML = await resp.text();
 
   // Set active nav link
