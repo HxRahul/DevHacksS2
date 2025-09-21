@@ -11,10 +11,12 @@ const googleSignUpBtn = document.getElementById('googleSignUpBtn');
 
 
 if (signInForm) {
+  
   signInForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('signInEmail').value;
     const password = document.getElementById('signInPassword').value;
+    
     try {
       await signInWithEmailAndPassword(auth, email, password);
       window.location.href = 'pages/search/search.html';
