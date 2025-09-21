@@ -11,21 +11,18 @@
   </script>
 </head>
 <body>
-  <!-- Main camera area (big, centered) -->
-  <main class="camera-area" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px;">
+  <header class="header-bar"></header>
+  <main class="camera-area">
     <video id="video" autoplay playsinline></video>
     <canvas id="canvas" style="display:none;"></canvas>
-
-    <button id="snap">Capture</button>
-
+    <!-- Capture button overlaid on camera feed -->
+    <button id="snap" class="capture-btn">Capture</button>
     <!-- Optional file upload (kept for script compatibility) -->
     <input type="file" id="file-input" accept="image/*" style="margin-top: 8px;" />
-
     <!-- Hidden/positioned by your CSS; kept for script compatibility -->
     <button id="clear-gallery" style="display:none;">Clear Gallery</button>
     <div id="gallery"></div>
   </main>
-
   <script src="camera_script.js" type="module"></script>
 </body>
 </html>
