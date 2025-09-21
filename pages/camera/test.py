@@ -6,7 +6,7 @@ from ultralytics import YOLO
 #for original model
 #model = YOLO("yolo11n.pt")
 
-model = YOLO("best.pt")
+model = YOLO("pages\\camera\\ClothesData\\runs\detect\\train\\weights\\best.pt")
 
 #change source = "1" for external camera
 
