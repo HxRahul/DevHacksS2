@@ -16,57 +16,13 @@ outfits = outfits.sort(() => Math.random() - 0.5);
 
 let currentIndex = 0;
 
-// Show outfit
+// Show outfit (for single image view, not pile)
 function showOutfit() {
   if (currentIndex < outfits.length) {
     document.getElementById("outfit-img").src = outfits[currentIndex].src;
   } else {
     document.getElementById("outfit-container").innerHTML = "<p>No more outfits!</p>";
   }
-}
-
-const pileRoot = document.getElementById('outfit-pile-root');
-if (pileRoot) {
-  pileRoot.innerHTML = `
-    <div id="outfit-pile" style="position:relative;width:320px;height:420px;margin:40px auto;">
-      ${outfits.map((outfit, i) => `
-        <div class="outfit-card" data-id="${outfit.id}" style="
-          position:absolute;
-          top:${i * 12}px;
-          left:${i * 12}px;
-          z-index:${outfits.length - i};
-          transition: transform 0.5s, opacity 0.5s;
-        ">
-          <img src="${outfit.img}" style="width:320px;height:400px;border-radius:24px;box-shadow:0 4px 24px rgba(0,0,0,0.15);object-fit:cover;">
-          <div style="position:absolute;bottom:16px;left:0;width:100%;display:flex;justify-content:space-between;padding:0 24px;">
-            <button class="dislike-btn" style="font-size:2rem;background:#fff;border-radius:50%;border:none;width:48px;height:48px;box-shadow:0 2px 8px #0002;cursor:pointer;">✖</button>
-            <button class="like-btn" style="font-size:2rem;background:#fff;border-radius:50%;border:none;width:48px;height:48px;box-shadow:0 2px 8px #0002;cursor:pointer;">❤</button>
-          </div>
-        </div>
-      `).reverse().join('')}
-    </div>
-  `;
-
-  function handleSwipe(direction) {
-    const pile = document.getElementById('outfit-pile');
-    const cards = pile.querySelectorAll('.outfit-card');
-    if (!cards.length) return;
-    const topCard = cards[cards.length - 1];
-    topCard.style.transform = `translateX(${direction === 'right' ? '+' : '-'}500px) rotate(${direction === 'right' ? 30 : -30}deg)`;
-    topCard.style.opacity = 0;
-    setTimeout(() => {
-      topCard.remove();
-    }, 500);
-  }
-
-  pileRoot.addEventListener('click', function(e) {
-    if (e.target.classList.contains('like-btn')) {
-      handleSwipe('right');
-    }
-    if (e.target.classList.contains('dislike-btn')) {
-      handleSwipe('left');
-    }
-  });
 }
 
 // Save liked outfit to Firestore
@@ -89,14 +45,58 @@ async function likeImage(imageSrc) {
   }
 }
 
-// Like button
-document.getElementById("like").addEventListener("click", async () => {
-  const imageSrc = outfits[currentIndex].src;
-  await likeImage(imageSrc);
-  currentIndex++;
-  showOutfit();
-});
+// --- Outfit pile swipe logic with like integration ---
+const pileRoot = document.getElementById('outfit-pile-root');
+if (pileRoot) {
+  pileRoot.innerHTML = `
+    <div id="outfit-pile" style="position:relative;width:320px;height:420px;margin:40px auto;">
+      ${outfits.map((outfit, i) => `
+        <div class="outfit-card" data-src="${outfit.src}" style="
+          position:absolute;
+          top:${i * 12}px;
+          left:${i * 12}px;
+          z-index:${outfits.length - i};
+          transition: transform 0.5s, opacity 0.5s;
+        ">
+          <img src="${outfit.src}" style="width:320px;height:400px;border-radius:24px;box-shadow:0 4px 24px rgba(0,0,0,0.15);object-fit:cover;">
+          <div style="position:absolute;bottom:16px;left:0;width:100%;display:flex;justify-content:space-between;padding:0 24px;">
+            <button class="dislike-btn" style="font-size:2rem;background:#fff;border-radius:50%;border:none;width:48px;height:48px;box-shadow:0 2px 8px #0002;cursor:pointer;">✖</button>
+            <button class="like-btn" style="font-size:2rem;background:#fff;border-radius:50%;border:none;width:48px;height:48px;box-shadow:0 2px 8px #0002;cursor:pointer;">❤</button>
+          </div>
+        </div>
+      `).reverse().join('')}
+    </div>
+  `;
 
+  async function handleSwipe(direction, card) {
+    // Animate swipe
+    card.style.transform = `translateX(${direction === 'right' ? '+' : '-'}500px) rotate(${direction === 'right' ? 30 : -30}deg)`;
+    card.style.opacity = 0;
+    // If right swipe, save to Firestore
+    if (direction === 'right') {
+      const imageSrc = card.getAttribute('data-src');
+      await likeImage(imageSrc);
+    }
+    setTimeout(() => {
+      card.remove();
+    }, 500);
+  }
+
+  pileRoot.addEventListener('click', function(e) {
+    if (e.target.classList.contains('like-btn') || e.target.classList.contains('dislike-btn')) {
+      const card = e.target.closest('.outfit-card');
+      if (!card) return;
+      if (e.target.classList.contains('like-btn')) {
+        handleSwipe('right', card);
+      } else {
+        handleSwipe('left', card);
+      }
+    }
+  });
+}
+
+// Initial outfit display
+showOutfit();
 // Dislike button
 document.getElementById("dislike").addEventListener("click", () => {
   currentIndex++;
