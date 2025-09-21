@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fashion Profile — Instagram-style</title>
+    <style>
+        :root {
+            --accent: #ff4d6d;
+            --muted: #6b7280;
+            --bg: #f7f7fb;
+            --card: #ffffff;
+            --glass: rgba(255, 255, 255, 0.6);
+            --shadow: 0 6px 20px rgba(16, 24, 40, 0.08);
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, #fbfbfe, var(--bg));
+            color: #111827
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 28px auto;
+            padding: 20px
+        }
+
+        /* Profile card */
+        .profile-card {
+            background: var(--card);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow)
+        }
+
+        .banner {
+            height: 180px;
+            background: linear-gradient(90deg, #e6eefc, #fff0f6);
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 16px
+        }
+
+        .banner input {
+            position: absolute;
+            inset: 12px 12px auto auto;
+            opacity: 0
+        }
+
+        .banner .banner-actions {
+            position: absolute;
+            right: 12px;
+            top: 12px
+        }
+
+        .banner .banner-preview {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center
+        }
+
+        .profile-row {
+            display: flex;
+            gap: 20px;
+            padding: 18px
+        }
+
+        .avatar-wrap {
+            width: 160px;
+            margin-top: -64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .avatar {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.12);
+            background: #fff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .avatar input {
+            display: none
+        }
+
+        .edit-avatar {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer
+        }
+
+        .meta {
+            flex: 1
+        }
+
+        .meta h1 {
+            margin: 0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .meta .username {
+            font-weight: 600
+        }
+
+        .meta .bio {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 60%
+        }
+
+        /* Info & controls */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 18px;
+            padding: 18px
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(6px);
+            padding: 16px;
+            border-radius: 12px
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        label {
+            font-size: 13px;
+            color: var(--muted);
+            min-width: 84px
+        }
+
+        input[type=number],
+        select,
+        textarea {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e6e9ef;
+            background: white
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical
+        }
+
+        .totals {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .tot-box {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid #eef2ff;
+            box-shadow: 0 4px 12px rgba(12, 34, 80, 0.04);
+            text-align: center
+        }
+
+        .tot-box h3 {
+            margin: 0;
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .tot-box p {
+            margin: 8px 0 0;
+            font-size: 20px;
+            font-weight: 700
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 12px;
+            border-radius: 9px;
+            border: 0;
+            background: var(--accent);
+            color: white;
+            font-weight: 600
+        }
+
+        button.secondary {
+            background: #eef2ff;
+            color: #0f172a
+        }
+
+        .small {
+            padding: 8px 10px;
+            font-size: 14px
+        }
+
+        /* responsive */
+        @media (max-width:820px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .meta .bio {
+                max-width: 100%
+            }
+
+            .avatar-wrap {
+                width: 120px
+            }
+        }
+
+        /* footer helper */
+        .preview-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="banner" id="banner">
+                <div class="banner-preview" id="bannerPreview"></div>
+                <div class="banner-actions"> <label
+                        style="background:rgba(255,255,255,0.9);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600;color:#0f172a">
+                        Change banner <input type="file" id="bannerInput" accept="image/*" /> </label> </div>
+            </div>
+            <div class="profile-row">
+                <div class="avatar-wrap">
+                    <div class="avatar" id="avatar"> <img id="avatarImg"
+                            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect fill='%23f3f4f6' width='100%25' height='100%25'/><text x='50%25' y='55%25' font-size='48' text-anchor='middle' fill='%239ca3af' font-family='Arial' dy='.3em'>+</text></svg>"
+                            alt="avatar"> </div> <label class="edit-avatar" for="avatarInput">Change profile
+                        photo</label> <input type="file" id="avatarInput" accept="image/*">
+                </div>
+                <div class="meta">
+                    <h1><span class="username">@fashionlover</span></h1>
+                    <div class="bio" id="bioPreview">Add a short bio about yourself — your style, favorite colors, or a
+                        fashion motto.</div>
+                    <div style="margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"> <button
+                            class="small" id="editBtn">Edit profile</button> <button class="small secondary"
+                            id="saveBtn">Save to device</button>
+                        <div style="margin-left:auto;color:var(--muted);font-size:13px">Fashion App • Profile</div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-grid">
+                <div>
+                    <div class="card">
+                        <h3 style="margin-top:0">Measurements & Shirt Size</h3>
+                        <div class="form-row"> <label for="weight">Weight</label> <input type="number" id="weight"
+                                placeholder="kg" min="1"> </div>
+                        <div class="form-row"> <label for="height">Height</label> <input type="number" id="height"
+                                placeholder="cm" min="30"> </div>
+                        <div class="form-row"> <label for="size">Shirt size</label> <select id="size">
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M" selected>M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select> </div>
+                        <div style="margin-top:12px"> <label
+                                style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px">Short
+                                bio</label> <textarea id="bioInput" placeholder="Tell people about your style..."
+                                maxlength="180"></textarea>
+                            <div class="preview-note">Max 180 characters</div>
+                        </div>
+                        <div class="actions"> <button id="applyProfile">Apply</button> <button class="secondary"
+                                id="clearProfile">Reset</button> </div>
+                    </div>
+                    <div style="height:12px"></div>
+                    <div class="card">
+                        <h3 style="margin-top:0">Quick actions</h3>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap"> <button id="addBasket">Add outfit to
+                                basket</button> <button id="addCloset" class="secondary">Add outfit to closet</button>
+                            <button id="removeBasket" class="small">- basket</button> <button id="removeCloset"
+                                class="small">- closet</button> <button id="resetTotals" class="small secondary">Reset
+                                totals</button> </div>
+                        <div class="preview-note">Totals are saved locally in your browser.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h3 style="margin-top:0">Summary</h3>
+                        <div class="totals">
+                            <div class="tot-box">
+                                <h3>Total outfits in the basket</h3>
+                                <p id="basketTotal">0</p>
+                            </div>
+                            <div class="tot-box">
+                                <h3>Total outfits in the closet</h3>
+                                <p id="closetTotal">0</p>
+                            </div>
+                        </div>
+                        <div style="margin-top:14px">
+                            <h4 style="margin:0 0 8px 0">Profile snapshot</h4>
+                            <div style="display:flex;gap:10px;align-items:center">
+                                <div
+                                    style="width:64px;height:64px;border-radius:8px;overflow:hidden;border:1px solid #eef2ff">
+                                    <img id="snapAvatar" src="" style="width:100%;height:100%;object-fit:cover"></div>
+                                <div>
+                                    <div id="snapName" style="font-weight:700">@fashionlover</div>
+                                    <div id="snapMeasurements" style="color:var(--muted);font-size:13px">—</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height:12px"></div>
+                    <div class="card">
+                        <h3 style="margin-top:0">Export / Save</h3>
+                        <p style="margin:0 0 10px 0;color:var(--muted);font-size:13px">Download a small JSON snapshot of
+                            your profile.</p>
+                        <div style="display:flex;gap:8px"> <button id="downloadJson">Download JSON</button> <button
+                                id="copyJson" class="secondary">Copy JSON</button> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script> // Elements const avatarInput = document.getElementById('avatarInput'); const avatarImg = document.getElementById('avatarImg'); const bannerInput = document.getElementById('bannerInput'); const bannerPreview = document.getElementById('bannerPreview'); const bioInput = document.getElementById('bioInput'); const bioPreview = document.getElementById('bioPreview'); const weight = document.getElementById('weight'); const heightEl = document.getElementById('height'); const size = document.getElementById('size'); const applyBtn = document.getElementById('applyProfile'); const clearBtn = document.getElementById('clearProfile'); const basketTotalEl = document.getElementById('basketTotal'); const closetTotalEl = document.getElementById('closetTotal'); const addBasket = document.getElementById('addBasket'); const addCloset = document.getElementById('addCloset'); const removeBasket = document.getElementById('removeBasket'); const removeCloset = document.getElementById('removeCloset'); const resetTotals = document.getElementById('resetTotals'); const snapAvatar = document.getElementById('snapAvatar'); const snapName = document.getElementById('snapName'); const snapMeasurements = document.getElementById('snapMeasurements'); const saveBtn = document.getElementById('saveBtn'); const editBtn = document.getElementById('editBtn'); const downloadJson = document.getElementById('downloadJson'); const copyJson = document.getElementById('copyJson'); // Local storage keys const LS_KEYS = { basket: 'fashion_basket_total', closet: 'fashion_closet_total', profile: 'fashion_profile_snapshot' }; // Initialize totals function readIntLS(key){return parseInt(localStorage.getItem(key) || '0', 10)} let basketTotal = readIntLS(LS_KEYS.basket); let closetTotal = readIntLS(LS_KEYS.closet); function refreshTotals(){ basketTotalEl.textContent = basketTotal; closetTotalEl.textContent = closetTotal; } refreshTotals(); // Image helpers function previewFile(file, cb){ if(!file) return cb(null); const reader = new FileReader(); reader.onload = ()=> cb(reader.result); reader.readAsDataURL(file); } avatarInput.addEventListener('change', e=>{ const f = e.target.files && e.target.files[0]; previewFile(f, data=>{ if(data){avatarImg.src = data; snapAvatar.src = data; saveProfileToLS();} }); }); bannerInput.addEventListener('change', e=>{ const f = e.target.files && e.target.files[0]; previewFile(f, data=>{ if(data){bannerPreview.style.backgroundImage = url(${data}); saveProfileToLS();} }); }); // Apply profile changes to preview applyBtn.addEventListener('click', ()=>{ bioPreview.textContent = bioInput.value || 'Add a short bio about yourself — your style, favorite colors, or a fashion motto.'; snapName.textContent = '@fashionlover'; snapMeasurements.textContent = ${weight.value ? weight.value + ' kg' : '—'} • ${heightEl.value ? heightEl.value + ' cm' : '—'} • ${size.value}; saveProfileToLS(); alert('Profile applied and saved locally.'); }); clearBtn.addEventListener('click', ()=>{ if(!confirm('Reset measurements, bio, and images?')) return; weight.value='';heightEl.value='';size.value='M';bioInput.value='';bioPreview.textContent='Add a short bio about yourself — your style, favorite colors, or a fashion motto.'; avatarImg.src = avatarPlaceholder(); snapAvatar.src=''; bannerPreview.style.backgroundImage='none'; saveProfileToLS(); }); // Totals buttons addBasket.addEventListener('click', ()=>{basketTotal++; localStorage.setItem(LS_KEYS.basket,basketTotal); refreshTotals();}); addCloset.addEventListener('click', ()=>{closetTotal++; localStorage.setItem(LS_KEYS.closet,closetTotal); refreshTotals();}); removeBasket.addEventListener('click', ()=>{basketTotal = Math.max(0,basketTotal-1); localStorage.setItem(LS_KEYS.basket,basketTotal); refreshTotals();}); removeCloset.addEventListener('click', ()=>{closetTotal = Math.max(0,closetTotal-1); localStorage.setItem(LS_KEYS.closet,closetTotal); refreshTotals();}); resetTotals.addEventListener('click', ()=>{if(confirm('Reset totals to zero?')){basketTotal=0;closetTotal=0;localStorage.setItem(LS_KEYS.basket,0);localStorage.setItem(LS_KEYS.closet,0);refreshTotals();}}); // Save snapshot to localStorage function saveProfileToLS(){ const snapshot = { bio: bioInput.value || '', weight: weight.value || '', height: heightEl.value || '', size: size.value || '', avatar: avatarImg.src || '', bannerStyle: bannerPreview.style.backgroundImage || '' , updated: new Date().toISOString() }; localStorage.setItem(LS_KEYS.profile, JSON.stringify(snapshot)); } // Load saved profile function loadProfileFromLS(){ const raw = localStorage.getItem(LS_KEYS.profile); if(!raw) return; try{ const p = JSON.parse(raw); bioInput.value = p.bio || ''; bioPreview.textContent = p.bio || 'Add a short bio about yourself — your style, favorite colors, or a fashion motto.'; weight.value = p.weight || ''; heightEl.value = p.height || ''; size.value = p.size || 'M'; if(p.avatar) {avatarImg.src = p.avatar; snapAvatar.src = p.avatar} if(p.bannerStyle){bannerPreview.style.backgroundImage = p.bannerStyle} snapMeasurements.textContent = ${p.weight ? p.weight + ' kg' : '—'} • ${p.height ? p.height + ' cm' : '—'} • ${p.size || 'M'}; }catch(e){console.warn('Could not parse profile',e)} } loadProfileFromLS(); // quick save / edit saveBtn.addEventListener('click', ()=>{ const snapshot = localStorage.getItem(LS_KEYS.profile); if(!snapshot){alert('Nothing saved yet — apply your profile first.');return} const blob = new Blob([snapshot],{type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'fashion_profile.json'; a.click(); URL.revokeObjectURL(url); }); editBtn.addEventListener('click', ()=>{window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}); // Download/copy JSON downloadJson.addEventListener('click', ()=>{ const raw = localStorage.getItem(LS_KEYS.profile) || '{}'; const blob = new Blob([raw],{type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'fashion_profile.json'; a.click(); URL.revokeObjectURL(url); }); copyJson.addEventListener('click', async ()=>{ const raw = localStorage.getItem(LS_KEYS.profile) || '{}'; try{await navigator.clipboard.writeText(raw); alert('JSON copied to clipboard');}catch(e){alert('Could not copy — your browser may block clipboard access.')} }); // small helper placeholder function avatarPlaceholder(){ return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="%23f3f4f6" width="100%25" height="100%25"/><text x="50%25" y="55%25" font-size="120" text-anchor="middle" fill="%239ca3af" font-family="Arial" dy=".3em">+</text></svg>' } // ensure snapshot avatar shown if available (function(){ const raw = localStorage.getItem(LS_KEYS.profile); if(raw){try{const p=JSON.parse(raw); if(p.avatar){snapAvatar.src=p.avatar}}catch(e){} })(); // ensure totals are displayed refreshTotals(); </script>
+</body>
+
+</html>

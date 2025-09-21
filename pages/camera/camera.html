@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Camera</title>
-  <link rel="stylesheet" href="camera_style.css">
+  <link rel="stylesheet" href="../../assets/css/global.css" />
+  <link rel="stylesheet" href="camera_style.css" />
+  <script type="module">
+    import { injectHeader } from "../../assets/js/inject_header.js";
+    injectHeader();
+  </script>
 </head>
 <body>
-    <h1>Camera</h1>
-    <nav>
-      <ul>
-        <li><a href="../home/index.html">Home</a></li>
-        <li><a href="../profile/profile.html">Profile</a></li>
-        <li><a href="../register/register.html">Register</a></li>
-        <li><a href="../search/search.html">Search</a></li>
-        <li><a class="active" href="../camera/camera.html">Camera</a></li>
-        <li><a href="../wardrobe/wardrobe.html">Wardrobe</a></li>
-      </ul>
-  </nav>
+  <header class="header-bar"></header>
+  <main class="camera-area">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <!-- Capture button overlaid on camera feed -->
+    <button id="snap" class="capture-btn">Capture</button>
+    <!-- Optional file upload (kept for script compatibility) -->
+    <input type="file" id="file-input" accept="image/*" style="margin-top: 8px;" />
+    <!-- Hidden/positioned by your CSS; kept for script compatibility -->
+    <button id="clear-gallery" style="display:none;">Clear Gallery</button>
+    <div id="gallery"></div>
+  </main>
+  <script src="camera_script.js" type="module"></script>
 </body>
 </html>

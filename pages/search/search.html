@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Search</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
     <link rel="stylesheet" href="search_style.css">
+    <script type="module">
+      import { injectHeader } from "/assets/js/inject_header.js";
+      injectHeader();
+    </script>
 </head>
 <body>
-    <h1>Search</h1>
-    <nav>
-        <ul>
-          <li><a href="../home/index.html">Home</a></li>
-          <li><a href="../profile/profile.html">Profile</a></li>
-          <li><a href="../register/register.html">Register</a></li>
-          <li><a class="active" href="search.html">Search</a></li>
-          <li><a href="../camera/camera.html">Camera</a></li>
-          <li><a href="../wardrobe/wardrobe.html">Wardrobe</a></li>
-        </ul>
-    </nav>
+    <!-- Header will be injected here -->
+    <div style="position:fixed;top:18px;left:24px;z-index:1000;font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:#7c4f27;letter-spacing:2px;user-select:none;pointer-events:none;">FashOn</div>
+    <!-- <h1>Search</h1> -->
 
-    <!-- Outfit display -->
-    <div id="outfit-container">
-        <img id="outfit-img" src="" alt="Outfit" width="300">
-    </div>
+    <!-- Controls and image in a row -->
 
-    <!-- Like / Dislike buttons -->
-    <div id="controls">
-        <button id="dislike">❌ Dislike</button>
-        <button id="like">❤️ Like</button>
-    </div>
+    <div id="outfit-pile-root"></div>
 
-    <!-- Link your script -->
-    <script src="search_script.js"></script>
+    <script type="module" src="search_script.js"></script>
+    <script type="module" src="outfits.js"></script>
+</body>
+</html>
+    <script type="module" src="search_script.js"></script>
 </body>
 </html>
