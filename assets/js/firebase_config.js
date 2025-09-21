@@ -7,7 +7,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsq8jy85O9JYFwACfFGmBBRWGq-jOv6Ck",
-  authDomain: "fashn-devhacks.firebaseapp.com",
+  authDomain: "fashn-devhacks.firebaseapp.com", // <-- must match your domain
   projectId: "fashn-devhacks",
   storageBucket: "fashn-devhacks.appspot.com",
   messagingSenderId: "523104349054",

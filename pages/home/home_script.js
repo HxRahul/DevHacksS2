@@ -1,5 +1,11 @@
 import { auth, db } from "../../assets/js/firebase_config.js";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  signInWithRedirect 
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 
 
@@ -45,7 +51,6 @@ if (registerForm) {
   });
 }
 
-
 if (googleSignInBtn) {
   const provider = new GoogleAuthProvider();
   googleSignInBtn.addEventListener('click', async () => {
@@ -53,6 +58,12 @@ if (googleSignInBtn) {
       await signInWithPopup(auth, provider);
       window.location.href = 'pages/search/search.html';
     } catch (error) {
+      // Fallback to redirect if popup fails
+      try {
+        await signInWithRedirect(auth, provider);
+      } catch (redirectError) {
+        console.error(redirectError);
+      }
       authMessage.textContent = error.message;
       authMessage.style.color = 'red';
     }
@@ -64,11 +75,18 @@ if (googleSignUpBtn) {
   googleSignUpBtn.addEventListener('click', async () => {
     try {
       await signInWithPopup(auth, provider);
-      // Optionally, you can check if the user is new and show a message
       window.location.href = 'pages/search/search.html';
     } catch (error) {
+      // Fallback to redirect if popup fails
+      try {
+        await signInWithRedirect(auth, provider);
+      } catch (redirectError) {
+        console.error(redirectError);
+      }
       authMessage.textContent = error.message;
       authMessage.style.color = 'red';
     }
   });
 }
+
+
