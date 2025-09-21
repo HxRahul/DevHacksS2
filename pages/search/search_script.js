@@ -1,5 +1,5 @@
 // search_script.js
-import { auth, db } from "../../../assets/js/firebase_config.js";
+import { auth, db } from "../../assets/js/firebase_config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
