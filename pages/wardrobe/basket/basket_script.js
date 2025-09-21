@@ -44,7 +44,7 @@ async function displayLikedImages(user) {
   likedImages.forEach(src => {
     console.log('Rendering image:', src);
     const img = document.createElement('img');
-    img.src = "../../search/" + src;
+    img.src = src.startsWith('http') ? src : "../search/" + src;
     img.alt = 'Liked Outfit';
     img.width = 200;
     img.style.margin = '10px';

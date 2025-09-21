@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Wardrobe</title>
-    <link rel="stylesheet" href="../../../assets/css/global.css">
-    <link rel="stylesheet" href="basket_style.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="basket/basket_style.css">
     <style>
       .wardrobe-flex-container {
         display: flex;
@@ -28,7 +28,7 @@
       }
     </style>
     <script type="module">
-      import { injectHeader } from "../../../assets/js/inject_header.js";
+      import { injectHeader } from "../../assets/js/inject_header.js";
       injectHeader();
     </script>
 </head>
@@ -39,7 +39,7 @@
     <section class="wardrobe-section" id="basket-section">
       <h1>Basket</h1>
       <div id="liked-images-root"></div>
-      <script type="module" src="basket_script.js"></script>
+      <script type="module" src="basket/basket_script.js"></script>
     </section>
     <!-- Divider -->
     <div class="wardrobe-divider"></div>
@@ -48,7 +48,7 @@
       <h1>Closet</h1>
       <!-- Place your closet HTML here -->
       <div id="closet-root"></div>
-      <script type="module" src="../closet/closet_script.js"></script>
+      <script type="module" src="closet/closet_script.js"></script>
     </section>
   </div>
 </body>
