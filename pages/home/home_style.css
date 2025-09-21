@@ -1,18 +1,51 @@
 body {
-  background: #181818;
+  background: #8acdea;
   color: #fff;
   font-family: Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  /* Remove flex centering so header stays at the top */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.auth-flex-center {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-flex-container {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 900px;
+  /* margin: 60px auto; remove margin so it's truly centered */
 }
 .auth-container {
-  background: #222;
-  padding: 32px;
-  border-radius: 10px;
-  max-width: 350px;
-  margin: 60px auto;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  background: #264653;
+  color: #fff;
+  padding: 40px 32px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 370px;
+  min-width: 300px;
+  min-height: 300px;
+  box-shadow: 0 2px 18px rgba(71, 69, 69, 0.788);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  position: relative;
 }
 .auth-container h2 {
   margin-top: 0;
+  color: #fff;
 }
 .auth-container input {
   width: 100%;
@@ -20,26 +53,33 @@ body {
   margin: 8px 0;
   border: none;
   border-radius: 5px;
+  background: #fff;
+  color: #264653;
 }
 .auth-container button {
   width: 100%;
   padding: 10px;
   background: #fff;
-  color: #222;
+  color: #264653;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   margin-bottom: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+.auth-container button:hover {
+  background: #2a6a7b;
+  color: #fff;
 }
 #authMessage {
   margin-top: 10px;
   min-height: 20px;
 }
 
-#googleSignInBtn.google-btn {
+#googleSignInBtn.google-btn, #googleSignUpBtn.google-btn {
   background: #fff;
-  color: #444;
+  color: #264653;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -50,4 +90,56 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+#googleSignInBtn.google-btn:hover, #googleSignUpBtn.google-btn:hover {
+  background: #2a6a7b;
+  color: #fff;
+}
+.fashn-journey-title-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fashn-journey-title {
+  width: 100%;
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+  color: #264653;
+  font-family: 'Krub', 'Colophon Cd', 'Colophon Cadson Demak', Arial, Helvetica, sans-serif;
+}
+.credits {
+  font-size: 0.8rem;
+  color: #bcd1e6;
+  text-align: center;
+  opacity: 0.7;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 24px;
+}
+.header-bar {
+  margin-bottom: 0;
+}
+@media (max-width: 800px) {
+  .auth-flex-container {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  .auth-container {
+    min-width: 220px;
+    width: 100%;
+    max-width: 370px;
+    min-height: 0;
+  }
+  .fashn-journey-title {
+    font-size: 2rem;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
 }

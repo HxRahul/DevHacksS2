@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Search</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
     <link rel="stylesheet" href="search_style.css">
+    <script type="module">
+      import { injectHeader } from "../../assets/js/inject_header.js";
+      injectHeader();
+    </script>
 </head>
 <body>
+    <!-- Header will be injected here -->
     <h1>Search</h1>
-    <nav>
-        <ul>
-            <li><a href="../profile/profile.html">Profile</a></li>
-            <li><a href="../register/register.html">Register</a></li>
-            <li><a class="active" href="search.html">Search</a></li>
-            <li><a href="../camera/camera.html">Camera</a></li>
-            <li><a href="../wardrobe/wardrobe.html">Wardrobe</a></li>
-        </ul>
-    </nav>
 
-    <!-- Outfit display -->
-    <div id="outfit-container">
-        <img id="outfit-img" src="" alt="Outfit" width="300">
+    <!-- Controls and image in a row -->
+    <div id="outfit-controls-row">
+        <button id="dislike">❌</button>
+        <div id="outfit-container">
+            <img id="outfit-img" src="" alt="Outfit" width="300">
+        </div>
+        <button id="like">❤️</button>
     </div>
 
-    <!-- Like / Dislike buttons -->
-    <div id="controls">
-        <button id="dislike">❌ Dislike</button>
-        <button id="like">❤️ Like</button>
-    </div>
-
+    <script type="module" src="search_script.js"></script>
+</body>
+</html>
+</body>
+</html>
     <!-- Link your script as a module -->
     <script type="module" src="search_script.js"></script>
 </body>
