@@ -15,7 +15,7 @@ body, html {
 }
 
 .header-bar {
-  background: #544f4d; /* uniform semi-transparent dark gray */
+  background: #7c4f27; /* rich brown */
   color: #fff;
   position: absolute;
   top: 0;
@@ -26,7 +26,7 @@ body, html {
   min-width: 400px;
   max-width: 900px;
   border-radius: 40px;
-  box-shadow: 0 4px 24px #544f4d;
+  box-shadow: 0 4px 24px #7c4f27;
   z-index: 100;
   padding: 0 24px;
   margin: 0;
@@ -83,7 +83,7 @@ nav.universal-nav a, nav.universal-nav button {
 }
 
 nav.universal-nav a.active, nav.universal-nav a:hover, nav.universal-nav button:hover {
-  background: #31343b;
+  background: #a9744f;
 }
 
 .dropdown-content a {
@@ -91,12 +91,12 @@ nav.universal-nav a.active, nav.universal-nav a:hover, nav.universal-nav button:
   color: #fff;
   padding: 12px 16px;
   text-decoration: none;
-  background: #23272f;
+  background: #a9744f;
   border-radius: 0;
 }
 
 .dropdown-content a:hover {
-  background: #31343b;
+  background: #7c4f27;
 }
 
 .dropdown:hover .dropdown-content {

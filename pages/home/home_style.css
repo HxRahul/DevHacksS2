@@ -1,13 +1,9 @@
 body {
-  background: #8acdea;
-  color: #fff;
+  background: #f7f1ea;
+  color: #5a3317;
   font-family: Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
-  /* Remove flex centering so header stays at the top */
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 
 .auth-flex-center {
@@ -27,7 +23,7 @@ body {
   /* margin: 60px auto; remove margin so it's truly centered */
 }
 .auth-container {
-  background: #264653;
+  background: #a9744f;
   color: #fff;
   padding: 40px 32px;
   border-radius: 18px;
@@ -35,13 +31,18 @@ body {
   max-width: 370px;
   min-width: 300px;
   min-height: 300px;
-  box-shadow: 0 2px 18px rgba(71, 69, 69, 0.788);
+  box-shadow: 0 2px 18px rgba(122, 74, 39, 0.18);
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   justify-content: flex-start;
   position: relative;
+}
+.brown-theme-box {
+  background: #a9744f !important;
+  color: #fff !important;
+  box-shadow: 0 2px 18px rgba(122, 74, 39, 0.18) !important;
 }
 .auth-container h2 {
   margin-top: 0;
@@ -53,14 +54,14 @@ body {
   margin: 8px 0;
   border: none;
   border-radius: 5px;
-  background: #fff;
-  color: #264653;
+  background: #fff7f0;
+  color: #7c4f27;
 }
 .auth-container button {
   width: 100%;
   padding: 10px;
-  background: #fff;
-  color: #264653;
+  background: #7c4f27;
+  color: #fff;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -69,7 +70,7 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 .auth-container button:hover {
-  background: #2a6a7b;
+  background: #5a3317;
   color: #fff;
 }
 #authMessage {
@@ -78,9 +79,9 @@ body {
 }
 
 #googleSignInBtn.google-btn, #googleSignUpBtn.google-btn {
-  background: #fff;
-  color: #264653;
-  border: 1px solid #ccc;
+  background: #fff7f0;
+  color: #7c4f27;
+  border: 1px solid #a9744f;
   padding: 10px;
   border-radius: 5px;
   width: 100%;
@@ -93,7 +94,7 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 #googleSignInBtn.google-btn:hover, #googleSignUpBtn.google-btn:hover {
-  background: #2a6a7b;
+  background: #a9744f;
   color: #fff;
 }
 .fashn-journey-title-wrapper {
@@ -110,12 +111,12 @@ body {
   margin-top: 40px;
   margin-bottom: 18px;
   letter-spacing: 2px;
-  color: #264653;
+  color: #7c4f27;
   font-family: 'Krub', 'Colophon Cd', 'Colophon Cadson Demak', Arial, Helvetica, sans-serif;
 }
 .credits {
   font-size: 0.8rem;
-  color: #bcd1e6;
+  color: #e6d3c2;
   text-align: center;
   opacity: 0.7;
   margin-top: auto;
