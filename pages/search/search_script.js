@@ -62,7 +62,7 @@ let pileIndex = 0;
   const { likedImages, savedImages } = await getUserImages();
   const recs = await fetchRecommendations(likedImages, savedImages);
   // recs is an array of filenames, e.g. ["img_0005.jpeg", ...]
-  outfits = recs.map(f => ({ src: `outfits/${f}` }));
+  outfits = recs.map(f => ({ src: `${f}` }));
   pile = outfits.slice(0, 5).map((outfit, i, arr) => ({
     ...outfit,
     rotate: i === arr.length - 1 ? 0 : (Math.random() * 40 - 20),
