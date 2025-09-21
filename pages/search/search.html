@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>search</title>
+    <title>Search</title>
     <link rel="stylesheet" href="search_style.css">
 </head>
 <body>
@@ -12,11 +12,24 @@
           <li><a href="../home/index.html">Home</a></li>
           <li><a href="../profile/profile.html">Profile</a></li>
           <li><a href="../register/register.html">Register</a></li>
-          <li><a class="active" href="../search/search.html">Search</a></li>
+          <li><a class="active" href="search.html">Search</a></li>
           <li><a href="../camera/camera.html">Camera</a></li>
           <li><a href="../wardrobe/wardrobe.html">Wardrobe</a></li>
         </ul>
-      </nav>
+    </nav>
+
+    <!-- Outfit display -->
+    <div id="outfit-container">
+        <img id="outfit-img" src="" alt="Outfit" width="300">
+    </div>
+
+    <!-- Like / Dislike buttons -->
+    <div id="controls">
+        <button id="dislike">❌ Dislike</button>
+        <button id="like">❤️ Like</button>
+    </div>
+
+    <!-- Link your script -->
+    <script src="search_script.js"></script>
 </body>
 </html>
-
