@@ -6,16 +6,33 @@
   <link rel="stylesheet" href="camera_style.css">
 </head>
 <body>
-    <h1>Camera</h1>
-    <nav>
-      <ul>
-        
-        <li><a href="../profile/profile.html">Profile</a></li>
-        <li><a href="../register/register.html">Register</a></li>
-        <li><a href="../search/search.html">Search</a></li>
-        <li><a class="active" href="../camera/camera.html">Camera</a></li>
-        <li><a href="../wardrobe/wardrobe.html">Wardrobe</a></li>
-      </ul>
+  <h1>Camera</h1>
+  <nav>
+    <ul>
+      <li><a href="../profile/profile.html">Profile</a></li>
+      <li><a href="../register/register.html">Register</a></li>
+      <li><a href="../search/search.html">Search</a></li>
+      <li><a class="active" href="../camera/camera.html">Camera</a></li>
+      <li><a href="../wardrobe/wardrobe.html">Wardrobe</a></li>
+    </ul>
   </nav>
+
+  <!-- Webcam Capture -->
+  <h2>Take a Photo</h2>
+  <video id="video" width="300" autoplay playsinline></video>
+  <button id="snap">Capture</button>
+  <canvas id="canvas" width="300" height="300" style="display:none;"></canvas>
+
+  <!-- File Upload -->
+  <h2>Or Upload a File</h2>
+  <input type="file" id="file-input" accept="image/*">
+
+  <!-- Gallery -->
+  <h2>My Photos</h2>
+  <button id="clear-gallery">Clear Gallery</button>
+  <div id="gallery" style="display:flex; flex-wrap: wrap;"></div>
+
+  <!-- Script -->
+  <script src="camera_script.js" type="module"></script>
 </body>
 </html>
