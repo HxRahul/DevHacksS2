@@ -22,7 +22,7 @@ body, html {
   right: -30px;
   left: auto;
   transform: none;
-  width: 700px;
+  width: 560px;
   min-width: 400px;
   max-width: 900px;
   border-radius: 40px;
@@ -84,23 +84,6 @@ nav.universal-nav a, nav.universal-nav button {
 
 nav.universal-nav a.active, nav.universal-nav a:hover, nav.universal-nav button:hover {
   background: #31343b;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background: #23272f;
-  min-width: 140px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  z-index: 1;
-  right: 0;
-  border-radius: 0 0 16px 16px;
-  overflow: hidden;
 }
 
 .dropdown-content a {
