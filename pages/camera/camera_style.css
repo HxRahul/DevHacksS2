@@ -1,0 +1,31 @@
+.preview-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+.preview-btn {
+  position: absolute;
+  bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.keep-btn {
+  left: 20px;
+  background-color: green;
+}
+
+.delete-btn {
+  right: 20px;
+  background-color: red;
+}
