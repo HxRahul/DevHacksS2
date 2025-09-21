@@ -14,8 +14,13 @@ for (let i = 1; i <= 50; i++) {
 // Shuffle outfits
 outfits = outfits.sort(() => Math.random() - 0.5);
 
-// Maintain a pile of 5 at a time
-let pile = outfits.slice(0, 5);
+// Maintain a pile of 5 at a time, each with a fixed rotation/scatter
+let pile = outfits.slice(0, 5).map((outfit, i, arr) => ({
+  ...outfit,
+  rotate: i === arr.length - 1 ? 0 : (Math.random() * 40 - 20),
+  x: i === arr.length - 1 ? 0 : (Math.random() * 60 - 30),
+  y: i === arr.length - 1 ? 0 : (Math.random() * 40 - 20)
+}));
 let pileIndex = 5;
 
 // Save liked outfit to Firestore
@@ -44,18 +49,12 @@ function renderPile() {
   if (!pileRoot) return;
   pileRoot.innerHTML = `
     <div id="outfit-pile" style="position:relative;width:420px;height:560px;margin:40px auto;">
-      ${pile.map((outfit, i) => {
-        // Random scatter for each card (except the top card, which is centered)
-        const isTop = i === pile.length - 1;
-        const rotate = isTop ? 0 : (Math.random() * 40 - 20);
-        const x = isTop ? 0 : (Math.random() * 60 - 30);
-        const y = isTop ? 0 : (Math.random() * 40 - 20);
-        return `
+      ${pile.map((outfit, i) => `
         <div class="outfit-card" data-src="${outfit.src}" style="
           position:absolute;
           top:50%;left:50%;
-          transform: translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${rotate}deg);
-          z-index:${i + 1};
+          transform: translate(-50%, -50%) translate(${outfit.x || 0}px, ${outfit.y || 0}px) rotate(${outfit.rotate || 0}deg);
+          z-index:${pile.length - i};
           transition: transform 0.5s, opacity 0.5s;
         ">
           <img src="${outfit.src}" style="width:420px;height:540px;border-radius:24px;box-shadow:0 4px 24px rgba(0,0,0,0.15);object-fit:cover;">
@@ -64,8 +63,7 @@ function renderPile() {
             <button class="like-btn" style="font-size:2.2rem;background:#fff;border-radius:50%;border:none;width:56px;height:56px;box-shadow:0 2px 8px #0002;cursor:pointer;">❤</button>
           </div>
         </div>
-        `;
-      }).join('')}
+      `).reverse().join('')}
     </div>
   `;
 }
@@ -81,11 +79,24 @@ async function handleSwipe(direction, card) {
     // Remove the swiped card from the pile
     const src = card.getAttribute('data-src');
     pile = pile.filter(o => o.src !== src);
-    // Add a new outfit to the bottom if available
+    // Add a new outfit to the bottom if available, with a new random rotation/scatter
     if (pileIndex < outfits.length) {
-      pile.push(outfits[pileIndex]);
+      pile.push({
+        ...outfits[pileIndex],
+        rotate: Math.random() * 40 - 20,
+        x: Math.random() * 60 - 30,
+        y: Math.random() * 40 - 20
+      });
       pileIndex++;
     }
+    // // Ensure the new top card is always centered and not rotated/scattered
+    // if (pile.length > 0) {
+    //   pile[pile.length - 1].rotate = 0;
+    //   pile[pile.length - 1].x = 0;
+    //   pile[pile.length - 1].y = 0;
+    // }
+    // Only keep 5 in the pile
+    if (pile.length > 5) pile = pile.slice(pile.length - 5);
     renderPile();
   }, 500);
 }
